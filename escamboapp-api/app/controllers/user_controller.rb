@@ -18,12 +18,13 @@ class UserController < ApplicationController
     json_response(@user)
   end
 
-  # PUT /user/id
+  # PUT /user/:id
   def update
     @user.update(user_params)
     head :no_content
   end
 
+  # DELETE /user/:id
   def destroy
     @user.destroy
     head :no_content

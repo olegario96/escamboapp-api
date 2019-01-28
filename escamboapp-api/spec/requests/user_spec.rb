@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe 'User API', type: :request do
   # Initialize data
   let!(:user) { create(:user) }
-  # let!(:posts) { create_list(:post, 10) }
+  let!(:user_with_posts) { create(:user_with_posts) }
   let(:user_id) { user.id }
+  let(:post_id) { user_with_posts.posts.sample.id }
 
   # Test suite for GET /user
   describe 'GET /user' do
@@ -13,7 +14,7 @@ RSpec.describe 'User API', type: :request do
 
     it 'returns user' do
       expect(json).not_to be_empty
-      expect(json.size).to eq(1)
+      expect(json.size).to eq(2)
     end
 
     it 'returns status code 200' do

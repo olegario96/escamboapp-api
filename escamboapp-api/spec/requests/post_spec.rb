@@ -33,19 +33,4 @@ RSpec.describe 'Post API' do
       end
     end
   end
-
-  # Test suite for GET /category/:category_id/post
-  # describe 'GET /category/:category_id/post' do
-  #   before { get "/category/#{category_id}/post" }
-  #
-  #   context 'when category exists' do
-  #     it 'returns status code 200' do
-  #       expect(response).to have_http_status(200)
-  #     end
-  #
-  #     it 'returns all posts' do
-  #       expect(json.size).to be > 0
-  #     end
-  #   end
-  # end
 end

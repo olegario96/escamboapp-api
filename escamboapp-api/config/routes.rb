@@ -8,9 +8,9 @@ Rails.application.routes.draw do
 
   resources :category, only: [:index, :show]
 
-  # resources :category do
-  #   resources :post, only: [:index, :show]
-  # end
+  resources :category do
+    resources :post, only: [:index, :show], module: 'category'
+  end
 
   resources :post, only: [:create, :update, :destroy]
 end

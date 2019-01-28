@@ -13,4 +13,11 @@ Rails.application.routes.draw do
   end
 
   resources :post, only: [:create, :update, :destroy]
+
+  # resources :post do
+  #   resources :comment, only: [:index, :show], module: 'post'
+  # end
+
+  resources :comment
+
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Category API' do
+RSpec.describe 'Category API', type: :request do
   # Initialize test data
   let!(:categories) { create_list(:category, 10) }
   let( :category_id) { categories.first.id }

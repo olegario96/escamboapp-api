@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User Post API' do
+RSpec.describe 'User Post API', type: :request do
   # Initialize the test data
   let!(:user) { create(:user_with_posts) }
   let(:user_id) { user.id }

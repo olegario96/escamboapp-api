@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User Post API' do
+RSpec.describe 'User Post API', type: :request do
   # Initialize the test data
   let!(:category) { create(:category_with_posts) }
   let(:category_id) { category.id }

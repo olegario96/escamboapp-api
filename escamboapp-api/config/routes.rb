@@ -16,9 +16,10 @@ Rails.application.routes.draw do
 
   resources :post, only: [:create, :update, :destroy]
 
-  # resources :post do
-  #   resources :comment, only: [:index, :show], module: 'post'
-  # end
+  # /post/:id/comment
+  resources :post do
+    resources :comment, only: [:index, :show], module: 'post'
+  end
 
   resources :comment
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_28_031633) do
+ActiveRecord::Schema.define(version: 2019_02_01_015711) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -28,6 +28,19 @@ ActiveRecord::Schema.define(version: 2019_01_28_031633) do
     t.integer "post_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "permissions", force: :cascade do |t|
+    t.string "permission"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "permissions_users", id: false, force: :cascade do |t|
+    t.integer "permission_id", null: false
+    t.integer "user_id", null: false
+    t.index ["permission_id", "user_id"], name: "index_permissions_users_on_permission_id_and_user_id"
+    t.index ["user_id", "permission_id"], name: "index_permissions_users_on_user_id_and_permission_id"
   end
 
   create_table "posts", force: :cascade do |t|

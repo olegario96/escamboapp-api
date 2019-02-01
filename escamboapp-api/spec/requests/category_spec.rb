@@ -19,8 +19,8 @@ RSpec.describe 'Category API', type: :request do
     end
   end
 
-  # Test suite for GET /category/id
-  describe 'GET/category/:id' do
+  # Test suite for GET /category/:id
+  describe 'GET /category/:id' do
     before { get "/category/#{category_id}" }
 
     context 'when category exists' do

@@ -9,12 +9,14 @@ Rails.application.routes.draw do
 
   resources :category, only: [:index, :show]
 
+  resources :permission, only: [:index, :show]
+
   # /category/:id/post
   resources :category do
     resources :post, only: [:index, :show], module: 'category'
   end
 
-  resources :post, only: [:create, :update, :destroy]
+  resources :post
 
   # /post/:id/comment
   resources :post do

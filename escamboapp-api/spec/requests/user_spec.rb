@@ -37,6 +37,7 @@ RSpec.describe 'User API', type: :request do
       end
     end
 
+
     context 'when the record does not exist' do
       let(:user_id) { 100 }
 
@@ -48,67 +49,67 @@ RSpec.describe 'User API', type: :request do
         expect(response.body).to match(/Couldn't find User/)
       end
     end
+  end
 
-    # Test suite for POST /user
-    describe 'POST /user' do
-      let(:valid_attributes) {
-        {
-          name: 'Gustavo Olegario',
-          cpf: '09991356940',
-          email: 'gustavo-olegario@hotmail.com'
-        }
+  # Test suite for POST /user
+  describe 'POST /user' do
+    let(:valid_attributes) {
+      {
+        name: 'Gustavo Olegario',
+        cpf: '09991356940',
+        email: 'gustavo-olegario@hotmail.com'
       }
+    }
 
-      context 'when the request is valid' do
-        before { post '/user', params: valid_attributes }
+    context 'when the request is valid' do
+      before { post '/user', params: valid_attributes }
 
-        it 'creates a user' do
-          expect(json['name']).to eq('Gustavo Olegario')
-        end
-
-        it 'returns status code 201' do
-          expect(response).to have_http_status(201)
-        end
+      it 'creates a user' do
+        expect(json['name']).to eq('Gustavo Olegario')
       end
 
-      context 'when the request is invalid' do
-        before { post '/user', params: { name: 'Gustavo' } }
-
-        it 'returns status code 422' do
-          expect(response).to have_http_status(422)
-        end
-
-        it 'returns a validation failure message' do
-          expect(response.body)
-            .to match(/Validation failed: Cpf can't be blank, Email can't be blank/)
-        end
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
       end
     end
 
-    # Test suite for PUT /user/:id
-    describe 'PUT /user/:id' do
-      let(:valid_attributes) { { name: 'Gustavo' } }
+    context 'when the request is invalid' do
+      before { post '/user', params: { name: 'Gustavo' } }
 
-      context 'when the record exists' do
-        before { put "/user/#{user_id}", params: valid_attributes }
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
 
-        it 'updates the record' do
-          expect(response.body).to be_empty
-        end
-
-        it 'returns status code 204' do
-          expect(response).to have_http_status(204)
-        end
+      it 'returns a validation failure message' do
+        expect(response.body)
+          .to match(/Validation failed: Cpf can't be blank, Email can't be blank/)
       end
     end
+  end
 
-    # Test suite for DELETE /user/:id
-    describe 'DELETE /user/:id' do
-      before { delete "/user/#{user_id}" }
+  # Test suite for PUT /user/:id
+  describe 'PUT /user/:id' do
+    let(:valid_attributes) { { name: 'Gustavo' } }
+
+    context 'when the record exists' do
+      before { put "/user/#{user_id}", params: valid_attributes }
+
+      it 'updates the record' do
+        expect(response.body).to be_empty
+      end
 
       it 'returns status code 204' do
         expect(response).to have_http_status(204)
       end
+    end
+  end
+
+  # Test suite for DELETE /user/:id
+  describe 'DELETE /user/:id' do
+    before { delete "/user/#{user_id}" }
+
+    it 'returns status code 204' do
+      expect(response).to have_http_status(204)
     end
   end
 end

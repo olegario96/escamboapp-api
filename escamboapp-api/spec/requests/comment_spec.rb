@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe 'Comment API' do
+RSpec.describe 'Comment API', type: :request do
   # Initialize data
-  let!(:comments) { create_list(:comment, 10) }
-  let!(:post)     { create(:post) }
-  let!(:user)     { create(:user) }
-  let(:comment_id)      { comments.sample.id }
+  let!(:comments)  { create_list(:comment, 10) }
+  let!(:post_)     { create(:post) }
+  let!(:user)      { create(:user) }
+  let(:comment_id)        { comments.sample.id }
 
   # Test suite for GET /comment
   describe 'GET /comment' do
@@ -28,7 +28,7 @@ RSpec.describe 'Comment API' do
     context 'when the record exists' do
       it 'returns the comment' do
         expect(json).not_to be_empty
-        exepect(json['id']).to eq(comment_id)
+        expect(json['id']).to eq(comment_id)
       end
 
       it 'returns status code 200' do
@@ -56,8 +56,8 @@ RSpec.describe 'Comment API' do
           title: Faker::Lorem.sentence,
           description: Faker::Lorem.paragraph,
           rating: Faker::Number.between(1, 5),
-          post: post,
-          user: user
+          user_id: user.id,
+          post_id: post_.id
       }
     }
 
@@ -65,7 +65,7 @@ RSpec.describe 'Comment API' do
       before { post '/comment', params: valid_attributes }
 
       it 'creates a commment' do
-        expect(json['title']).to eq(valid_attributes['title'])
+        expect(json['title']).to eq(valid_attributes[:title])
       end
 
       it 'returns status code 201' do
@@ -81,7 +81,7 @@ RSpec.describe 'Comment API' do
       end
 
       it 'returns a validation failure message' do
-        expect(response.body).to match(/A/)
+        expect(response.body).to match(/Validation failed: User must exist, Post must exist, Description can't be blank, Rating can't be blank/)
       end
     end
   end

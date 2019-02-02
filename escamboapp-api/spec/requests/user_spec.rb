@@ -55,9 +55,10 @@ RSpec.describe 'User API', type: :request do
   describe 'POST /user' do
     let(:valid_attributes) {
       {
-        name: 'Gustavo Olegario',
-        cpf: '09991356940',
-        email: 'gustavo-olegario@hotmail.com'
+        name: Faker::Name.first_name,
+        cpf: Faker::CPF.numeric,
+        email: Faker::Internet.email,
+        password_digest: Faker::Internet.password
       }
     }
 
@@ -65,7 +66,7 @@ RSpec.describe 'User API', type: :request do
       before { post '/user', params: valid_attributes }
 
       it 'creates a user' do
-        expect(json['name']).to eq('Gustavo Olegario')
+        expect(json['name']).to eq(valid_attributes[:name])
       end
 
       it 'returns status code 201' do
@@ -82,7 +83,7 @@ RSpec.describe 'User API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Validation failed: Cpf can't be blank, Email can't be blank/)
+          .to match(/Validation failed: Password can't be blank, Cpf can't be blank, Email can't be blank/)
       end
     end
   end

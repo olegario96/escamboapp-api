@@ -3,7 +3,7 @@ FactoryBot.define do
     name { Faker::Name.name }
     email { Faker::Internet.email }
     cpf { Faker::CPF.numeric }
-    password_digest { Faker::Internet.password }
+    password { Faker::Internet.password }
 
     factory :user_with_posts do
       transient do

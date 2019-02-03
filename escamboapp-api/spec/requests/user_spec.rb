@@ -76,7 +76,6 @@ RSpec.describe 'User API', type: :request do
       end
     end
 
-
     context 'when the record does not exist' do
       let(:user_id) { 100 }
 

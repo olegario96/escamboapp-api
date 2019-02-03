@@ -5,10 +5,12 @@ RSpec.describe 'Post Comment API', type: :request do
   let!(:post_with_comments) { create(:post_with_comments) }
   let(:post_id)                   { post_with_comments.id }
   let(:comment_id)                { post_with_comments.comments.sample.id }
+  let(:user)    { create(:user) }
+  let(:headers) { valid_headers }
 
   # Test suite for GET /post/:post_id/comment
   describe 'GET /post/:post_id/comment' do
-    before { get "/post/#{post_id}/comment" }
+    before { get "/post/#{post_id}/comment", params: {}, headers: headers }
 
     context 'when post exists' do
       it 'returns status code 200' do
@@ -35,7 +37,7 @@ RSpec.describe 'Post Comment API', type: :request do
 
   # Test suite for GET /post/:post_id/comment/:comment_id
   describe 'GET /post/:post_id/comment/:comment_id' do
-    before { get "/post/#{post_id}/comment/#{comment_id}" }
+    before { get "/post/#{post_id}/comment/#{comment_id}", params: {}, headers: headers }
 
     context 'when comment exists' do
       it 'returns status code 200' do

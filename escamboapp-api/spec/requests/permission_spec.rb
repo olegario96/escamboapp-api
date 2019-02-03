@@ -2,13 +2,15 @@ require 'rails_helper'
 
 RSpec.describe 'Permission API', type: :request do
   # Initialize data
+  let!(:user) { create(:user) }
   let!(:permissions) { create_list(:permission, 10) }
   let(:permission)        { permissions.sample }
   let(:permission_id)     { permission.id }
+  let(:headers) { valid_headers }
 
   # Test suite for GET /permission
   describe 'GET /permission' do
-    before { get '/permission' }
+    before { get '/permission', params: {}, headers: headers }
 
     it 'returns permissions' do
       expect(json).not_to be_empty
@@ -22,7 +24,7 @@ RSpec.describe 'Permission API', type: :request do
 
   # Test suite for GET /permission/:id
   describe 'GET /permission/:id' do
-    before { get "/permission/#{permission_id}" }
+    before { get "/permission/#{permission_id}", params: {}, headers: headers }
 
     context 'when permission exists' do
       it 'returns status code 200' do

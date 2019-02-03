@@ -4,6 +4,7 @@ RSpec.describe 'User API', type: :request do
   # Initialize data
   let!(:user) { create(:user) }
   let(:headers) { valid_headers.except('Authorization') }
+  let(:valid_headers_) { valid_headers }
   let(:valid_attributes) do
     {
       name: Faker::Name.first_name,
@@ -48,7 +49,7 @@ RSpec.describe 'User API', type: :request do
   # Test suite for GET /user
   describe 'GET /user' do
     # make HTTP get request before each example
-    before { get '/user' }
+    before { get '/user', params: {}, headers: valid_headers_ }
 
     it 'returns user' do
       expect(json).not_to be_empty
@@ -62,7 +63,7 @@ RSpec.describe 'User API', type: :request do
 
   # Test suite for GET /user/:id
   describe 'GET /user/:id' do
-    before { get "/user/#{user_id}" }
+    before { get "/user/#{user_id}", params: {}, headers: valid_headers_ }
 
     context 'when the record exists' do
       it 'returns the user' do
@@ -131,7 +132,7 @@ RSpec.describe 'User API', type: :request do
     let(:valid_attributes) { { name: 'Gustavo' } }
 
     context 'when the record exists' do
-      before { put "/user/#{user_id}", params: valid_attributes }
+      before { put "/user/#{user_id}", params: valid_attributes, headers: valid_headers_}
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -145,7 +146,7 @@ RSpec.describe 'User API', type: :request do
 
   # Test suite for DELETE /user/:id
   describe 'DELETE /user/:id' do
-    before { delete "/user/#{user_id}" }
+    before { delete "/user/#{user_id}", params: {}, headers: valid_headers_ }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

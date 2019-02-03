@@ -6,10 +6,11 @@ RSpec.describe 'Comment API', type: :request do
   let!(:post_)     { create(:post) }
   let!(:user)      { create(:user) }
   let(:comment_id)        { comments.sample.id }
+  let(:headers)           { valid_headers }
 
   # Test suite for GET /comment
   describe 'GET /comment' do
-    before { get '/comment' }
+    before { get '/comment', params: {}, headers: headers }
 
     it 'returns all comements' do
       expect(json).not_to be_empty
@@ -23,7 +24,7 @@ RSpec.describe 'Comment API', type: :request do
 
   # Test suite for GET /comment/:id
   describe 'GET /comment/:id' do
-    before { get "/comment/#{comment_id}" }
+    before { get "/comment/#{comment_id}", params: {}, headers: headers }
 
     context 'when the record exists' do
       it 'returns the comment' do
@@ -62,7 +63,7 @@ RSpec.describe 'Comment API', type: :request do
     }
 
     context 'when the request is valid' do
-      before { post '/comment', params: valid_attributes }
+      before { post '/comment', params: valid_attributes, headers: headers }
 
       it 'creates a commment' do
         expect(json['title']).to eq(valid_attributes[:title])
@@ -74,7 +75,7 @@ RSpec.describe 'Comment API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/comment', params: { title: 'Foo' } }
+      before { post '/comment', params: { title: 'Foo' }, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -91,7 +92,7 @@ RSpec.describe 'Comment API', type: :request do
     let(:valid_attributes) { { title: Faker::Lorem.sentence } }
 
     context 'when the record exists' do
-      before { put "/comment/#{comment_id}", params: valid_attributes }
+      before { put "/comment/#{comment_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -105,7 +106,7 @@ RSpec.describe 'Comment API', type: :request do
 
   # Test suite for DELETE /comment/:id
   describe 'DELETE /comment/:id' do
-    before { delete "/comment/#{comment_id}" }
+    before { delete "/comment/#{comment_id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

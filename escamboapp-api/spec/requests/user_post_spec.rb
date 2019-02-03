@@ -5,10 +5,11 @@ RSpec.describe 'User Post API', type: :request do
   let!(:user) { create(:user_with_posts) }
   let(:user_id) { user.id }
   let(:post_id) { user.posts.sample.id }
+  let(:headers) { valid_headers }
 
   # Test suite for GET /user/:user_id/post
   describe 'GET /user/:user_id/post' do
-    before { get "/user/#{user_id}/post" }
+    before { get "/user/#{user_id}/post", params: {}, headers: headers }
 
     context 'when user exists' do
       it 'returns status code 200' do
@@ -35,7 +36,7 @@ RSpec.describe 'User Post API', type: :request do
 
   # Test suite for GET /user/:user_id/post/:post_id
   describe 'GET /user/:user_id/post/:post_id' do
-    before { get "/user/#{user_id}/post/#{post_id}" }
+    before { get "/user/#{user_id}/post/#{post_id}", params: {}, headers: headers }
 
     context 'when post exists' do
       it 'returns status code 200' do

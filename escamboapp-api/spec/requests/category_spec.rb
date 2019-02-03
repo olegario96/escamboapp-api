@@ -2,12 +2,14 @@ require 'rails_helper'
 
 RSpec.describe 'Category API', type: :request do
   # Initialize test data
+  let!(:user) { create(:user) }
   let!(:categories) { create_list(:category, 10) }
   let( :category_id) { categories.first.id }
+  let(:headers) { valid_headers }
 
   # Test suite for GET /category
   describe 'GET /category' do
-    before { get '/category' }
+    before { get '/category', params: {}, headers: headers }
 
     it 'returns categories' do
       expect(json).not_to be_empty
@@ -21,7 +23,7 @@ RSpec.describe 'Category API', type: :request do
 
   # Test suite for GET /category/:id
   describe 'GET /category/:id' do
-    before { get "/category/#{category_id}" }
+    before { get "/category/#{category_id}", params: {}, headers: headers }
 
     context 'when category exists' do
       it 'returns status code 200' do

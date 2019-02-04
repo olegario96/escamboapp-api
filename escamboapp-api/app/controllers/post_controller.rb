@@ -1,10 +1,14 @@
 class PostController < ApplicationController
   before_action :set_post, only: [:show, :update, :destroy]
+  # configure url for images
+  before_action :set_active_storage_host, only: [:index, :show]
 
   # GET /post
   def index
+    posts = []
     @posts = Post.paginate(page: params[:page], per_page: 20)
-    json_response(@posts)
+    @posts.each { |post| posts.push(post.with_images) }
+    json_response(posts)
   end
 
   # POST /post
@@ -15,7 +19,7 @@ class PostController < ApplicationController
 
   # GET /post/:id
   def show
-    json_response(@post)
+    json_response(@post.with_images)
   end
 
   # PUT /post/:id
@@ -33,10 +37,14 @@ class PostController < ApplicationController
   private
 
   def post_params
-    params.permit(:productName, :description, :user_id, :category_id, :price)
+    params.permit(:productName, :description, :user_id, :category_id, :price, images: [])
   end
 
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def set_active_storage_host
+    ActiveStorage::Current.host = request.base_url
   end
 end

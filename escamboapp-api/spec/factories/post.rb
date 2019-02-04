@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :post do
     productName { Faker::Commerce.product_name }
     description { Faker::Lorem.paragraph }
+    price { "#{Random.rand(500)}.#{Random.rand(99)}" }
     user
     category
 

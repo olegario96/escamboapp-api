@@ -56,6 +56,7 @@ RSpec.describe 'Post API', type: :request do
       {
         productName: Faker::Commerce.product_name,
         description: Faker::Lorem.paragraph,
+        price: "#{Random.rand(500)}.#{Random.rand(99)}",
         user_id: user_with_posts.sample.id,
         category_id: category.id
       }

@@ -33,7 +33,7 @@ class PostController < ApplicationController
   private
 
   def post_params
-    params.permit(:productName, :description, :user_id, :category_id)
+    params.permit(:productName, :description, :user_id, :category_id, :price)
   end
 
   def set_post

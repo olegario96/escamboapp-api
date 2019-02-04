@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::API
   include Response
   include ExceptionHandler
+  # enabling helpers
+  include ActionController::Helpers
 
   # called before every action on controllers
   before_action :authorize_request

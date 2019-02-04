@@ -11,14 +11,18 @@ class Post < ApplicationRecord
   validates_presence_of :productName, :description, :price_cents
 
   def with_images
-    images_ = []
-    images.each { |image| images_.push(image.service_url) }
-    self.attributes.merge(images: images_)
+    if not self.images.empty?
+      images_ = []
+      images.each { |image| images_.push(image.service_url) }
+      self.attributes.merge(images: images_)
+    else
+      self.attributes
+    end
   end
 
   private
 
   def formatted_price
-    return "#{price.currency.symbol}#{price.fractional.to_f/100}"
+    "#{price.currency.symbol}#{price.fractional.to_f/100}"
   end
 end

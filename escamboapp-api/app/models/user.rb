@@ -11,6 +11,7 @@ class User < ApplicationRecord
   validates_presence_of :name, :cpf, :email, :password_digest
 
   def with_avatar
+    puts(avatar.attached?)
     if avatar.attached?
       attributes.merge({avatar: avatar.service_url})
     else

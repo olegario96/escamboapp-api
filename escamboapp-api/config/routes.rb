@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   post 'signup', to: 'user#create'
 
+  post 'search', to: 'search#search'
+
   resources :user
 
   # /user/:id/post

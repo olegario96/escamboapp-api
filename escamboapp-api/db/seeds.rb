@@ -82,9 +82,22 @@ end
 
   photo = "img#{Random.rand(1..15)}.jpg"
   post.images.attach(io: File.open("./public/templates/images-for-product/#{photo}"), filename: "#{photo}")
-  photo = "img#{Random.rand(15)}.jpg"
+  photo = "img#{Random.rand(1..15)}.jpg"
   post.images.attach(io: File.open("./public/templates/images-for-product/#{photo}"), filename: "#{photo}")
 end
+
+post = Post.create!(
+    productName: "Carro irado",
+    description: Faker::Lorem.paragraph([1,2,3,4].sample),
+    user_id: user.id,
+    category_id: Category.all.sample.id,
+    price: "#{Random.rand(5000)}.#{Random.rand(99)}"
+)
+
+photo = "img#{Random.rand(1..15)}.jpg"
+post.images.attach(io: File.open("./public/templates/images-for-product/#{photo}"), filename: "#{photo}")
+photo = "img#{Random.rand(1..15)}.jpg"
+post.images.attach(io: File.open("./public/templates/images-for-product/#{photo}"), filename: "#{photo}")
 
 
 puts('Users created!')

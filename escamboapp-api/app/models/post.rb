@@ -20,6 +20,10 @@ class Post < ApplicationRecord
     end
   end
 
+  def self.search(term)
+    Post.all.where('lower(productName) LIKE ?', "%#{term.downcase}")
+  end
+
   private
 
   def formatted_price

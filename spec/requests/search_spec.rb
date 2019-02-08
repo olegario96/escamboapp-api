@@ -31,7 +31,6 @@ RSpec.describe 'Search API', type: :request do
 
     context 'when the search term does not exists' do
       before { post '/search', params: {term: "bar"} }
-
       it 'returns empty list' do
         expect(json.length).to be == 0
       end

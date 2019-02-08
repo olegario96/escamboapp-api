@@ -16,6 +16,7 @@ gem 'puma', '~> 3.11'
 gem 'bcrypt', '~> 3.1.7'
 # A pure ruby implementation of the RFC 7519 OAuth JSON Web Token (JWT) standard.
 gem 'jwt'
+gem 'pg', "<1.0"
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -29,6 +30,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'will_paginate', '~>3.1.0'
 # Integration of RubyMoney - Money with Rails
 gem 'money-rails', '~>1.12'
+gem 'faker'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
@@ -38,9 +40,6 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'cpf_faker'
   gem 'rspec-rails', '~>3.5'
-  gem 'faker'
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3', '~>1.3.6'
 end
 
 group :development do
@@ -55,10 +54,6 @@ group :test do
   gem 'factory_bot_rails', '~>4.0'
   gem 'shoulda-matchers', '~>3.1'
   gem 'database_cleaner'
-end
-
-group :production do
-  gem 'pg'
 end
 
 

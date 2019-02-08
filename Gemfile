@@ -31,6 +31,7 @@ gem 'will_paginate', '~>3.1.0'
 # Integration of RubyMoney - Money with Rails
 gem 'money-rails', '~>1.12'
 gem 'faker'
+gem 'cpf_faker'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
@@ -38,7 +39,7 @@ gem 'faker'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'cpf_faker'
+
   gem 'rspec-rails', '~>3.5'
 end
 

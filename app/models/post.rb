@@ -8,7 +8,7 @@ class Post < ApplicationRecord
   # Images for post
   has_many_attached :images
 
-  validates_presence_of :productName, :description, :price_cents
+  validates_presence_of :productName, :description, :price_cents, :user_id, :category_id
 
   def with_images
     if not self.images.empty?

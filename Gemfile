@@ -58,7 +58,7 @@ group :test do
 end
 
 group :production do
-  gem 'pg' -- --with-pg-config=/usr/local/bin/pg_config
+  gem 'pg'
 end
 
 
